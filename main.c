@@ -42,17 +42,36 @@ int main () {
     IMG_Init(IMG_INIT_PNG);
     // load sample.png into image
     SDL_Surface *image;
-    image = IMG_Load("nexy.png");
+    image = IMG_Load("sans_sprite_uniform.png");
     if(!image) {
         printf("IMG_Load: %s\n", IMG_GetError());
         // handle error
     }
-    SDL_Rect *imageTextureRect;
+    int s = 32;
+    SDL_Rect spriteRects[16] = {
+        {x: 00, y: 00, w: s, h: s},
+        {x: 32, y: 00, w: s, h: s},
+        {x: 64, y: 00, w: s, h: s},
+        {x: 96, y: 00, w: s, h: s},
+        {x: 00, y: 32, w: s, h: s},
+        {x: 32, y: 32, w: s, h: s},
+        {x: 64, y: 32, w: s, h: s},
+        {x: 96, y: 32, w: s, h: s},
+        {x: 00, y: 64, w: s, h: s},
+        {x: 32, y: 64, w: s, h: s},
+        {x: 64, y: 64, w: s, h: s},
+        {x: 96, y: 64, w: s, h: s},
+        {x: 00, y: 96, w: s, h: s},
+        {x: 32, y: 96, w: s, h: s},
+        {x: 64, y: 96, w: s, h: s},
+        {x: 96, y: 96, w: s, h: s}
+    };
     SDL_Texture *imageTexture = SDL_CreateTextureFromSurface(renderer, image);
+    
 
     /* Filling the surface with red color. */
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-    SDL_Rect rect = {x: 128, y: 256, h: 64, w: 64};
+    SDL_Rect rect = {x: 128, y: 256, h: 128, w: 128};
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 
@@ -65,6 +84,7 @@ int main () {
     bool key_down = false;
     bool key_left = false;
     bool key_right = false;
+    uint8_t sprite_frame = 0;
     while (1) {
         // Loop over all events that were pushed into the event queue since last tick
         while(SDL_PollEvent(&event)) {
@@ -118,12 +138,14 @@ int main () {
             rect.y = (rect.y + 1) % height;
         }
         // SDL_RenderDrawRect(renderer, &rect);
+        SDL_RenderClear(renderer);
         SDL_RenderCopy(
             renderer,
             imageTexture,
-            &image->clip_rect,
+            &spriteRects[sprite_frame],
             &rect
         );
+        sprite_frame = (sprite_frame + 1) % 16;
         SDL_RenderPresent(renderer);
         printf("x: %d | y: %d\n", rect.x, rect.y);
         SDL_Delay(24);
