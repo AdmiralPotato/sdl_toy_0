@@ -71,7 +71,7 @@ int main () {
 
     /* Filling the surface with red color. */
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-    SDL_Rect rect = {x: 128, y: 256, h: 128, w: 128};
+    SDL_Rect rect = {x: 128, y: 256, h: 64, w: 64};
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 
@@ -85,6 +85,9 @@ int main () {
     bool key_left = false;
     bool key_right = false;
     uint8_t sprite_frame = 0;
+    uint8_t sprite_direction = 0;
+    uint8_t movement_speed = 4;
+    bool any_movement = false;
     while (1) {
         // Loop over all events that were pushed into the event queue since last tick
         while(SDL_PollEvent(&event)) {
@@ -124,31 +127,49 @@ int main () {
                 }
             }
         }
-
+        any_movement = (
+            key_up ||
+            key_down ||
+            key_left ||
+            key_right
+        );
         if(key_left) {
-            rect.x = (rect.x - 1 + width) % width;
+            rect.x = (rect.x - movement_speed + width) % width;
+            sprite_direction = 8;
         }
         if(key_right) {
-            rect.x = (rect.x + 1) % width;
+            rect.x = (rect.x + movement_speed) % width;
+            sprite_direction = 12;
         }
         if(key_up) {
-            rect.y = (rect.y - 1 + height) % height;
+            rect.y = (rect.y - movement_speed + height) % height;
+            sprite_direction = 4;
         }
         if(key_down) {
-            rect.y = (rect.y + 1) % height;
+            rect.y = (rect.y + movement_speed) % height;
+            sprite_direction = 0;
+        }
+        if(any_movement) {
+            sprite_frame += 1;
+            sprite_frame %= 4;
         }
         // SDL_RenderDrawRect(renderer, &rect);
         SDL_RenderClear(renderer);
         SDL_RenderCopy(
             renderer,
             imageTexture,
-            &spriteRects[sprite_frame],
+            &spriteRects[sprite_frame + sprite_direction],
             &rect
         );
-        sprite_frame = (sprite_frame + 1) % 16;
         SDL_RenderPresent(renderer);
-        printf("x: %d | y: %d\n", rect.x, rect.y);
-        SDL_Delay(24);
+        printf(
+            "x: %d | y: %d | sprite_frame: %d | sprite_direction: %d\n",
+            rect.x,
+            rect.y,
+            sprite_frame,
+            sprite_direction
+        );
+        SDL_Delay(66);
     }
     SDL_FreeSurface(image);
     SDL_FreeSurface(surface);
