@@ -39,9 +39,20 @@ int main () {
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
 
+    IMG_Init(IMG_INIT_PNG);
+    // load sample.png into image
+    SDL_Surface *image;
+    image = IMG_Load("nexy.png");
+    if(!image) {
+        printf("IMG_Load: %s\n", IMG_GetError());
+        // handle error
+    }
+    SDL_Rect *imageTextureRect;
+    SDL_Texture *imageTexture = SDL_CreateTextureFromSurface(renderer, image);
+
     /* Filling the surface with red color. */
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-    SDL_Rect rect = {x: 128, y: 256, h: 32, w: 64};
+    SDL_Rect rect = {x: 128, y: 256, h: 64, w: 64};
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 
@@ -55,6 +66,7 @@ int main () {
     bool key_left = false;
     bool key_right = false;
     while (1) {
+        // Loop over all events that were pushed into the event queue since last tick
         while(SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 printf("SDL_QUIT\n");
@@ -105,14 +117,18 @@ int main () {
         if(key_down) {
             rect.y = (rect.y + 1) % height;
         }
-        
-        SDL_RenderDrawRect(renderer, &rect);
+        // SDL_RenderDrawRect(renderer, &rect);
+        SDL_RenderCopy(
+            renderer,
+            imageTexture,
+            &image->clip_rect,
+            &rect
+        );
         SDL_RenderPresent(renderer);
-        printf("x: %d\n", rect.x);
-        // Get the next event
+        printf("x: %d | y: %d\n", rect.x, rect.y);
         SDL_Delay(24);
     }
-
+    SDL_FreeSurface(image);
     SDL_FreeSurface(surface);
     surface = NULL;
     SDL_DestroyTexture(texture);

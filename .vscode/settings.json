@@ -2,6 +2,7 @@
     "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
     "cmake.configureOnOpen": true,
     "files.associations": {
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "sdl_image.h": "c"
     }
 }
