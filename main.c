@@ -49,29 +49,29 @@ int main () {
     }
     int s = 32;
     SDL_Rect spriteRects[16] = {
-        {x: 00, y: 00, w: s, h: s},
-        {x: 32, y: 00, w: s, h: s},
-        {x: 64, y: 00, w: s, h: s},
-        {x: 96, y: 00, w: s, h: s},
-        {x: 00, y: 32, w: s, h: s},
-        {x: 32, y: 32, w: s, h: s},
-        {x: 64, y: 32, w: s, h: s},
-        {x: 96, y: 32, w: s, h: s},
-        {x: 00, y: 64, w: s, h: s},
-        {x: 32, y: 64, w: s, h: s},
-        {x: 64, y: 64, w: s, h: s},
-        {x: 96, y: 64, w: s, h: s},
-        {x: 00, y: 96, w: s, h: s},
-        {x: 32, y: 96, w: s, h: s},
-        {x: 64, y: 96, w: s, h: s},
-        {x: 96, y: 96, w: s, h: s}
+        {.x =  00, .y =  00, .w =  s, .h =  s},
+        {.x =  32, .y =  00, .w =  s, .h =  s},
+        {.x =  64, .y =  00, .w =  s, .h =  s},
+        {.x =  96, .y =  00, .w =  s, .h =  s},
+        {.x =  00, .y =  32, .w =  s, .h =  s},
+        {.x =  32, .y =  32, .w =  s, .h =  s},
+        {.x =  64, .y =  32, .w =  s, .h =  s},
+        {.x =  96, .y =  32, .w =  s, .h =  s},
+        {.x =  00, .y =  64, .w =  s, .h =  s},
+        {.x =  32, .y =  64, .w =  s, .h =  s},
+        {.x =  64, .y =  64, .w =  s, .h =  s},
+        {.x =  96, .y =  64, .w =  s, .h =  s},
+        {.x =  00, .y =  96, .w =  s, .h =  s},
+        {.x =  32, .y =  96, .w =  s, .h =  s},
+        {.x =  64, .y =  96, .w =  s, .h =  s},
+        {.x =  96, .y =  96, .w =  s, .h =  s}
     };
     SDL_Texture *imageTexture = SDL_CreateTextureFromSurface(renderer, image);
     
 
     /* Filling the surface with red color. */
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-    SDL_Rect rect = {x: 128, y: 256, h: 64, w: 64};
+    SDL_SetRenderDrawColor(renderer, 31, 31, 31, SDL_ALPHA_OPAQUE);
+    SDL_Rect rect = {.x =  128, .y =  256, .h =  64, .w =  64};
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 
