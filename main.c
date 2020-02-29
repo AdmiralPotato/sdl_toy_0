@@ -3,25 +3,34 @@
 #include "SDL.h"
 #include "SDL_image.h"
 
+#define SPRITE_SIZE 32
+#define S_0 0
+#define S_1 SPRITE_SIZE * 1
+#define S_2 SPRITE_SIZE * 2
+#define S_3 SPRITE_SIZE * 3
+
+int width = 640;
+int height = 480;
+int bitDepth = 32;
+
+SDL_Window *window;
+SDL_Renderer *renderer;
+SDL_Surface *characterSurface;
+SDL_Texture *characterTexture;
+
+void quit (int exitCode) {
+    SDL_DestroyTexture(characterTexture);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+    window = NULL;
+    characterTexture = NULL;
+    exit(exitCode);
+}
+
 int main () {
-    int width = 640;
-    int height = 480;
-    int depth = 32;
-    /* Create a 32-bit surface with the bytes of each pixel in R,G,B,A order,
-       as expected by OpenGL for textures */
-    SDL_Surface *surface;
-
-    /* or using the default masks for the depth: */
-    surface = SDL_CreateRGBSurface(0, width, height, depth, 0, 0, 0, 0);
-
-    if (surface == NULL) {
-        SDL_Log("SDL_CreateRGBSurface() failed: %s", SDL_GetError());
-        exit(1);
-    }
-
     SDL_Init(SDL_INIT_VIDEO);
 
-    SDL_Window *window = SDL_CreateWindow(
+    window = SDL_CreateWindow(
         "SDL2Test",
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
@@ -30,7 +39,7 @@ int main () {
         0
     );
 
-    SDL_Renderer *renderer = SDL_CreateRenderer(
+    renderer = SDL_CreateRenderer(
         window,
         -1,
         SDL_RENDERER_SOFTWARE
@@ -40,46 +49,41 @@ int main () {
     SDL_RenderPresent(renderer);
 
     IMG_Init(IMG_INIT_PNG);
-    // load sample.png into image
-    SDL_Surface *image;
-    image = IMG_Load("sans_sprite_uniform.png");
-    if(!image) {
+
+    characterSurface = IMG_Load("sans_sprite_uniform.png");
+    if(!characterSurface) {
         printf("IMG_Load: %s\n", IMG_GetError());
-        // handle error
+        quit(1);
     }
-    int s = 32;
-    SDL_Rect spriteRects[16] = {
-        {.x =  00, .y =  00, .w =  s, .h =  s},
-        {.x =  32, .y =  00, .w =  s, .h =  s},
-        {.x =  64, .y =  00, .w =  s, .h =  s},
-        {.x =  96, .y =  00, .w =  s, .h =  s},
-        {.x =  00, .y =  32, .w =  s, .h =  s},
-        {.x =  32, .y =  32, .w =  s, .h =  s},
-        {.x =  64, .y =  32, .w =  s, .h =  s},
-        {.x =  96, .y =  32, .w =  s, .h =  s},
-        {.x =  00, .y =  64, .w =  s, .h =  s},
-        {.x =  32, .y =  64, .w =  s, .h =  s},
-        {.x =  64, .y =  64, .w =  s, .h =  s},
-        {.x =  96, .y =  64, .w =  s, .h =  s},
-        {.x =  00, .y =  96, .w =  s, .h =  s},
-        {.x =  32, .y =  96, .w =  s, .h =  s},
-        {.x =  64, .y =  96, .w =  s, .h =  s},
-        {.x =  96, .y =  96, .w =  s, .h =  s}
-    };
-    SDL_Texture *imageTexture = SDL_CreateTextureFromSurface(renderer, image);
     
+    SDL_Rect spriteRects[16] = {
+        {.x =  S_0, .y =  S_0, .w =  S_1, .h =  S_1},
+        {.x =  S_1, .y =  S_0, .w =  S_1, .h =  S_1},
+        {.x =  S_2, .y =  S_0, .w =  S_1, .h =  S_1},
+        {.x =  S_3, .y =  S_0, .w =  S_1, .h =  S_1},
+        {.x =  S_0, .y =  S_1, .w =  S_1, .h =  S_1},
+        {.x =  S_1, .y =  S_1, .w =  S_1, .h =  S_1},
+        {.x =  S_2, .y =  S_1, .w =  S_1, .h =  S_1},
+        {.x =  S_3, .y =  S_1, .w =  S_1, .h =  S_1},
+        {.x =  S_0, .y =  S_2, .w =  S_1, .h =  S_1},
+        {.x =  S_1, .y =  S_2, .w =  S_1, .h =  S_1},
+        {.x =  S_2, .y =  S_2, .w =  S_1, .h =  S_1},
+        {.x =  S_3, .y =  S_2, .w =  S_1, .h =  S_1},
+        {.x =  S_0, .y =  S_3, .w =  S_1, .h =  S_1},
+        {.x =  S_1, .y =  S_3, .w =  S_1, .h =  S_1},
+        {.x =  S_2, .y =  S_3, .w =  S_1, .h =  S_1},
+        {.x =  S_3, .y =  S_3, .w =  S_1, .h =  S_1}
+    };
+    characterTexture = SDL_CreateTextureFromSurface(renderer, characterSurface);
+    // don't need characterSurface after it's used as a texture, free it
+    SDL_FreeSurface(characterSurface);
+    characterSurface = NULL;
 
     /* Filling the surface with red color. */
     SDL_SetRenderDrawColor(renderer, 31, 31, 31, SDL_ALPHA_OPAQUE);
 
-    SDL_Rect rect = {x: 128, y: 256, h: 32, w: 32};
+    SDL_Rect playerRect = {.x =  128, .y =  256, .h =  S_1, .w =  S_1};
 
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
-
-    if (texture == NULL) {
-        fprintf(stderr, "CreateTextureFromSurface failed: %s\n", SDL_GetError());
-        exit(1);
-    }
     SDL_Event event;
     bool key_up = false;
     bool key_down = false;
@@ -97,7 +101,7 @@ int main () {
         while(SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 printf("SDL_QUIT\n");
-                exit(0);
+                quit(0);
             }
             if (
                 (
@@ -111,7 +115,7 @@ int main () {
                 printf("event.key.keysym.scancode, %d\n", event.key.keysym.scancode);
                 if(event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
                     printf("SDL_SCANCODE_ESCAPE\n");
-                    exit(0);
+                    quit(0);
                 }
                 if(event.key.keysym.scancode == SDL_SCANCODE_LEFT) {
                     printf("left %d\n", state);
@@ -143,49 +147,42 @@ int main () {
         );
         movement_speed = key_shift ? run_speed : walk_speed;
         if(key_left) {
-            rect.x = (rect.x - movement_speed + width) % width;
+            playerRect.x = (playerRect.x - movement_speed + width) % width;
             sprite_direction = 8;
         }
         if(key_right) {
-            rect.x = (rect.x + movement_speed) % width;
+            playerRect.x = (playerRect.x + movement_speed) % width;
             sprite_direction = 12;
         }
         if(key_up) {
-            rect.y = (rect.y - movement_speed + height) % height;
+            playerRect.y = (playerRect.y - movement_speed + height) % height;
             sprite_direction = 4;
         }
         if(key_down) {
-            rect.y = (rect.y + movement_speed) % height;
+            playerRect.y = (playerRect.y + movement_speed) % height;
             sprite_direction = 0;
         }
         if(any_movement) {
             sprite_frame += 1;
             sprite_frame %= 4;
         }
-        // SDL_RenderDrawRect(renderer, &rect);
         SDL_RenderClear(renderer);
         SDL_RenderCopy(
             renderer,
-            imageTexture,
+            characterTexture,
             &spriteRects[sprite_frame + sprite_direction],
-            &rect
+            &playerRect
         );
         SDL_RenderPresent(renderer);
         printf(
             "x: %d | y: %d | sprite_frame: %d | sprite_direction: %d\n",
-            rect.x,
-            rect.y,
+            playerRect.x,
+            playerRect.y,
             sprite_frame,
             sprite_direction
         );
-        SDL_Delay(45);
+        SDL_Delay(66);
     }
-    SDL_FreeSurface(image);
-    SDL_FreeSurface(surface);
-    surface = NULL;
-    SDL_DestroyTexture(texture);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
 
     return 0;
 }
