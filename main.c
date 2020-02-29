@@ -71,7 +71,8 @@ int main () {
 
     /* Filling the surface with red color. */
     SDL_SetRenderDrawColor(renderer, 31, 31, 31, SDL_ALPHA_OPAQUE);
-    SDL_Rect rect = {.x =  128, .y =  256, .h =  64, .w =  64};
+
+    SDL_Rect rect = {x: 128, y: 256, h: 32, w: 32};
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 
@@ -84,9 +85,12 @@ int main () {
     bool key_down = false;
     bool key_left = false;
     bool key_right = false;
+    bool key_shift = false;
     uint8_t sprite_frame = 0;
     uint8_t sprite_direction = 0;
-    uint8_t movement_speed = 4;
+    uint8_t movement_speed = 0;
+    uint8_t walk_speed = 4;
+    uint8_t run_speed = 8;
     bool any_movement = false;
     while (1) {
         // Loop over all events that were pushed into the event queue since last tick
@@ -125,6 +129,10 @@ int main () {
                     printf("down %d\n", state);
                     key_down = state;
                 }
+                if(event.key.keysym.scancode == SDL_SCANCODE_LSHIFT) {
+                    printf("down %d\n", state);
+                    key_shift = state;
+                }
             }
         }
         any_movement = (
@@ -133,6 +141,7 @@ int main () {
             key_left ||
             key_right
         );
+        movement_speed = key_shift ? run_speed : walk_speed;
         if(key_left) {
             rect.x = (rect.x - movement_speed + width) % width;
             sprite_direction = 8;
@@ -169,7 +178,7 @@ int main () {
             sprite_frame,
             sprite_direction
         );
-        SDL_Delay(66);
+        SDL_Delay(45);
     }
     SDL_FreeSurface(image);
     SDL_FreeSurface(surface);
