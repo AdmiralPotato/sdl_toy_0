@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include "SDL.h"
-#include "SDL_image.h"
+#include <SDL.h>
+#include <SDL_image.h>
+#include "visual_button.h"
 
 #define SPRITE_SIZE 32
 #define S_0 0
@@ -17,6 +18,60 @@ SDL_Window *window;
 SDL_Renderer *renderer;
 SDL_Surface *characterSurface;
 SDL_Texture *characterTexture;
+
+SDL_Rect spriteRects[16] = {
+    {.x =  S_0, .y =  S_0, .w =  S_1, .h =  S_1},
+    {.x =  S_1, .y =  S_0, .w =  S_1, .h =  S_1},
+    {.x =  S_2, .y =  S_0, .w =  S_1, .h =  S_1},
+    {.x =  S_3, .y =  S_0, .w =  S_1, .h =  S_1},
+    {.x =  S_0, .y =  S_1, .w =  S_1, .h =  S_1},
+    {.x =  S_1, .y =  S_1, .w =  S_1, .h =  S_1},
+    {.x =  S_2, .y =  S_1, .w =  S_1, .h =  S_1},
+    {.x =  S_3, .y =  S_1, .w =  S_1, .h =  S_1},
+    {.x =  S_0, .y =  S_2, .w =  S_1, .h =  S_1},
+    {.x =  S_1, .y =  S_2, .w =  S_1, .h =  S_1},
+    {.x =  S_2, .y =  S_2, .w =  S_1, .h =  S_1},
+    {.x =  S_3, .y =  S_2, .w =  S_1, .h =  S_1},
+    {.x =  S_0, .y =  S_3, .w =  S_1, .h =  S_1},
+    {.x =  S_1, .y =  S_3, .w =  S_1, .h =  S_1},
+    {.x =  S_2, .y =  S_3, .w =  S_1, .h =  S_1},
+    {.x =  S_3, .y =  S_3, .w =  S_1, .h =  S_1}
+};
+
+bool key_up = false;
+bool key_down = false;
+bool key_left = false;
+bool key_right = false;
+bool key_shift = false;
+
+struct Button {
+    SDL_Point point;
+    bool *state;
+};
+
+#define BUTTONS 5
+struct Button buttons[] = {
+    {
+        .point = { .x = 16, .y = 0 },
+        .state = &key_up
+    },
+    {
+        .point = { .x = 16, .y = 32 },
+        .state = &key_down
+    },
+    {
+        .point = { .x = 0, .y = 16 },
+        .state = &key_left
+    },
+    {
+        .point = { .x = 32, .y = 16 },
+        .state = &key_right
+    },
+    {
+        .point = { .x = 64, .y = 16 },
+        .state = &key_shift
+    }
+};
 
 void quit (int exitCode) {
     SDL_DestroyTexture(characterTexture);
@@ -42,8 +97,10 @@ int main () {
     renderer = SDL_CreateRenderer(
         window,
         -1,
-        SDL_RENDERER_SOFTWARE
+        SDL_RENDERER_ACCELERATED
     );
+    initButtons(renderer);
+
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
@@ -55,25 +112,6 @@ int main () {
         printf("IMG_Load: %s\n", IMG_GetError());
         quit(1);
     }
-    
-    SDL_Rect spriteRects[16] = {
-        {.x =  S_0, .y =  S_0, .w =  S_1, .h =  S_1},
-        {.x =  S_1, .y =  S_0, .w =  S_1, .h =  S_1},
-        {.x =  S_2, .y =  S_0, .w =  S_1, .h =  S_1},
-        {.x =  S_3, .y =  S_0, .w =  S_1, .h =  S_1},
-        {.x =  S_0, .y =  S_1, .w =  S_1, .h =  S_1},
-        {.x =  S_1, .y =  S_1, .w =  S_1, .h =  S_1},
-        {.x =  S_2, .y =  S_1, .w =  S_1, .h =  S_1},
-        {.x =  S_3, .y =  S_1, .w =  S_1, .h =  S_1},
-        {.x =  S_0, .y =  S_2, .w =  S_1, .h =  S_1},
-        {.x =  S_1, .y =  S_2, .w =  S_1, .h =  S_1},
-        {.x =  S_2, .y =  S_2, .w =  S_1, .h =  S_1},
-        {.x =  S_3, .y =  S_2, .w =  S_1, .h =  S_1},
-        {.x =  S_0, .y =  S_3, .w =  S_1, .h =  S_1},
-        {.x =  S_1, .y =  S_3, .w =  S_1, .h =  S_1},
-        {.x =  S_2, .y =  S_3, .w =  S_1, .h =  S_1},
-        {.x =  S_3, .y =  S_3, .w =  S_1, .h =  S_1}
-    };
     characterTexture = SDL_CreateTextureFromSurface(renderer, characterSurface);
     // don't need characterSurface after it's used as a texture, free it
     SDL_FreeSurface(characterSurface);
@@ -82,14 +120,14 @@ int main () {
     /* Filling the surface with red color. */
     SDL_SetRenderDrawColor(renderer, 31, 31, 31, SDL_ALPHA_OPAQUE);
 
-    SDL_Rect playerRect = {.x =  128, .y =  256, .h =  S_1, .w =  S_1};
+    SDL_Rect playerRect = {
+        .x =  width / 2,
+        .y =  height / 2,
+        .h =  S_1,
+        .w =  S_1
+    };
 
     SDL_Event event;
-    bool key_up = false;
-    bool key_down = false;
-    bool key_left = false;
-    bool key_right = false;
-    bool key_shift = false;
     uint8_t sprite_frame = 0;
     uint8_t sprite_direction = 0;
     uint8_t movement_speed = 0;
@@ -111,30 +149,25 @@ int main () {
                 !event.key.repeat
             ) {
                 bool state = event.type == SDL_KEYDOWN;
-                printf("SDL_KEYDOWN, %d\n", event.key.timestamp);
-                printf("event.key.keysym.scancode, %d\n", event.key.keysym.scancode);
+                // printf("SDL_KEYDOWN, %d\n", event.key.timestamp);
+                // printf("event.key.keysym.scancode, %d\n", event.key.keysym.scancode);
                 if(event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
                     printf("SDL_SCANCODE_ESCAPE\n");
                     quit(0);
                 }
                 if(event.key.keysym.scancode == SDL_SCANCODE_LEFT) {
-                    printf("left %d\n", state);
                     key_left = state;
                 }
                 if(event.key.keysym.scancode == SDL_SCANCODE_RIGHT) {
-                    printf("right %d\n", state);
                     key_right = state;
                 }
                 if(event.key.keysym.scancode == SDL_SCANCODE_UP) {
-                    printf("up %d\n", state);
                     key_up = state;
                 }
                 if(event.key.keysym.scancode == SDL_SCANCODE_DOWN) {
-                    printf("down %d\n", state);
                     key_down = state;
                 }
                 if(event.key.keysym.scancode == SDL_SCANCODE_LSHIFT) {
-                    printf("down %d\n", state);
                     key_shift = state;
                 }
             }
@@ -173,6 +206,13 @@ int main () {
             &spriteRects[sprite_frame + sprite_direction],
             &playerRect
         );
+        for (char i = 0; i < BUTTONS; i++) {
+            drawButton(
+                renderer,
+                *buttons[i].state,
+                &buttons[i].point
+            );
+        }
         SDL_RenderPresent(renderer);
         printf(
             "x: %d | y: %d | sprite_frame: %d | sprite_direction: %d\n",

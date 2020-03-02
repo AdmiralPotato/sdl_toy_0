@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.7)
 
 project(sdl_toy_0)
 
+set(CMAKE_C_COMPILER clang)
+set(CMAKE_CXX_COMPILER clang)
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_C_CLANG_TIDY clang-tidy)
 set(CMAKE_CXX_CLANG_TIDY clang-tidy)
@@ -13,5 +16,10 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
 
-add_executable(sdl_toy_0 ./main.c)
+file(GLOB SOURCES
+    "./*.h"
+    "./*.c"
+)
+
+add_executable(sdl_toy_0 ${SOURCES})
 target_link_libraries(sdl_toy_0 ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
