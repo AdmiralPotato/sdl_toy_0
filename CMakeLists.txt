@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.5)
 
 project(sdl_toy_0)
 
@@ -19,6 +19,11 @@ include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
 file(GLOB SOURCES
     "./*.h"
     "./*.c"
+)
+file(
+    COPY
+    ${CMAKE_CURRENT_SOURCE_DIR}/sans_sprite_uniform.png
+    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 add_executable(sdl_toy_0 ${SOURCES})
