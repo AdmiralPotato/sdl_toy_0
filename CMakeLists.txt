@@ -25,6 +25,12 @@ file(
     ${CMAKE_CURRENT_SOURCE_DIR}/sans_sprite_uniform.png
     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
 )
+file(
+    COPY
+    ${CMAKE_CURRENT_SOURCE_DIR}/frame.png
+    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+)
+
 
 add_executable(sdl_toy_0 ${SOURCES})
 target_link_libraries(sdl_toy_0 ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})

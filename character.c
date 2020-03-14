@@ -37,10 +37,10 @@ uint8_t run_speed = 8;
 bool any_movement = false;
 
 void initCharacter (SDL_Renderer *renderer) {
-    playerRect.x =  width / 2;
-    playerRect.y =  height / 2;
-    playerRect.h =  CHARACTER_WIDTH;
-    playerRect.w =  CHARACTER_WIDTH;
+    playerRect.x = gameRect.w / 2;
+    playerRect.y = gameRect.h / 2;
+    playerRect.h = CHARACTER_WIDTH;
+    playerRect.w = CHARACTER_WIDTH;
     characterSurface = IMG_Load("sans_sprite_uniform.png");
     if (!characterSurface) {
         printf("IMG_Load: %s\n", IMG_GetError());
@@ -66,19 +66,19 @@ void drawCharacter (SDL_Renderer *renderer) {
     );
     movement_speed = key_shift ? run_speed : walk_speed;
     if(key_left) {
-        playerRect.x = (playerRect.x - movement_speed + width) % width;
+        playerRect.x = (playerRect.x - movement_speed + gameRect.w) % gameRect.w;
         sprite_direction = 8;
     }
     if(key_right) {
-        playerRect.x = (playerRect.x + movement_speed) % width;
+        playerRect.x = (playerRect.x + movement_speed) % gameRect.w;
         sprite_direction = 12;
     }
     if(key_up) {
-        playerRect.y = (playerRect.y - movement_speed + height) % height;
+        playerRect.y = (playerRect.y - movement_speed + gameRect.h) % gameRect.h;
         sprite_direction = 4;
     }
     if(key_down) {
-        playerRect.y = (playerRect.y + movement_speed) % height;
+        playerRect.y = (playerRect.y + movement_speed) % gameRect.h;
         sprite_direction = 0;
     }
     if(any_movement) {
