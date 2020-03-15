@@ -21,4 +21,6 @@ void initCharacter (SDL_Renderer *renderer);
 
 void unloadCharacter ();
 
+void updateCharacter ();
+
 void drawCharacter (SDL_Renderer *renderer);

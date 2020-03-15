@@ -61,29 +61,6 @@ void sdl_quit (bool state);
 
 void toggleHexEditor (bool state);
 
-void runHex00000001 (bool state);
-void runHex00000010 (bool state);
-void runHex00000100 (bool state);
-void runHex00001000 (bool state);
-void runHex00010000 (bool state);
-void runHex00100000 (bool state);
-void runHex01000000 (bool state);
-void runHex10000000 (bool state);
-enum HEX_OPS {
-    HEX_OPS_SET,
-    HEX_OPS_ADD,
-    HEX_OPS_SUB,
-    HEX_OPS_XOR
-};
-void opSet (bool state);
-void opAdd (bool state);
-void opSub (bool state);
-void opXor (bool state);
-void mem0 (bool state);
-void mem1 (bool state);
-void mem2 (bool state);
-void mem3 (bool state);
-
 struct LED {
     bool *state;
     SDL_Point point;

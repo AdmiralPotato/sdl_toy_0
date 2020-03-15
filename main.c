@@ -7,16 +7,17 @@
 #include "font.h"
 #include "character.h"
 #include "frame.h"
+#include "hex_editor.h"
 
 int widthFrame = 544;
 int heightFrame = 400;
 bool loop = true;
-char mutableString[] = "!@#$%^&*()_+{}:\"<>?\\|0123456789\nWhat's up muh goats!!!\nI hope you are all having a great night!YOU WILL BE LICKED BY A GOAT TODAY\n\nso watch out\n\nor don't, your choice\nBut this line won't be rendered at all";
+char mutableString[129] = "Hello Dankness My Old Friend";
 SDL_Rect stringDestinationRect = {
     .x = 16,
-    .y = 32,
-    .w = 250,
-    .h = 96
+    .y = 16,
+    .w = 320 - 32,
+    .h = 240 - 32
 };
 
 SDL_Window *window;
@@ -113,6 +114,7 @@ int main () {
     initFont(renderer);
     initFrame(renderer);
     initCharacter(renderer);
+    initHexEditor(renderer);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
@@ -121,13 +123,19 @@ int main () {
     while (loop) {
         handleEventsSinceLastTick();
 
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
         SDL_RenderClear(renderer);
         drawFrame(renderer);
-
+        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
         // use isolated gameTexture for rendering
         SDL_SetRenderTarget(renderer, gameTexture);
         SDL_RenderClear(renderer);
 
+        if (led_hex_toggle) {
+            updateHexEditor();
+        } else {
+            updateCharacter();
+        }
         drawCharacter(renderer);
 
         drawString(
@@ -135,6 +143,10 @@ int main () {
             mutableString,
             &stringDestinationRect
         );
+
+        if (led_hex_toggle) {
+            drawHexEditor(renderer, mutableString);
+        }
 
         // draw isolated gameTexture back on to window texture
         SDL_SetRenderTarget(renderer, NULL);

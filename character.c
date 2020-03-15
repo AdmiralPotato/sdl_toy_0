@@ -57,12 +57,12 @@ void unloadCharacter () {
     characterTexture = NULL;
 }
 
-void drawCharacter (SDL_Renderer *renderer) {
+void updateCharacter () {
     any_movement = (
-            key_up ||
-            key_down ||
-            key_left ||
-            key_right
+        key_up ||
+        key_down ||
+        key_left ||
+        key_right
     );
     movement_speed = key_shift ? run_speed : walk_speed;
     if(key_left) {
@@ -85,17 +85,20 @@ void drawCharacter (SDL_Renderer *renderer) {
         sprite_frame += 1;
         sprite_frame %= 4;
     }
+}
+
+void drawCharacter (SDL_Renderer *renderer) {
+    // printf(
+    //     "x: %d | y: %d | sprite_frame: %d | sprite_direction: %d\n",
+    //     playerRect.x,
+    //     playerRect.y,
+    //     sprite_frame,
+    //     sprite_direction
+    // );
     SDL_RenderCopy(
-            renderer,
-            characterTexture,
-            &spriteRects[sprite_frame + sprite_direction],
-            &playerRect
-    );
-    printf(
-            "x: %d | y: %d | sprite_frame: %d | sprite_direction: %d\n",
-            playerRect.x,
-            playerRect.y,
-            sprite_frame,
-            sprite_direction
+        renderer,
+        characterTexture,
+        &spriteRects[sprite_frame + sprite_direction],
+        &playerRect
     );
 }

@@ -5,6 +5,7 @@
 
 #include "frame.h"
 #include "visual_button.h"
+#include "hex_editor.h"
 
 SDL_Surface *frameSurface;
 SDL_Texture *frameTexture;
@@ -16,7 +17,7 @@ bool key_right = false;
 bool key_shift = false;
 
 bool key_hex_toggle = false;
-bool led_hex_toggle = false;
+bool led_hex_toggle = true;
 
 bool key_hex_00000001 = false;
 bool led_hex_00000001 = false;
@@ -52,53 +53,6 @@ bool key_mem_2 = false;
 bool led_mem_2 = false;
 bool key_mem_3 = false;
 bool led_mem_3 = false;
-
-void runHex00000001 (bool state) { printf("runHex00000001 called with: %d\n", state); }
-void runHex00000010 (bool state) { printf("runHex00000010 called with: %d\n", state); }
-void runHex00000100 (bool state) { printf("runHex00000100 called with: %d\n", state); }
-void runHex00001000 (bool state) { printf("runHex00001000 called with: %d\n", state); }
-void runHex00010000 (bool state) { printf("runHex00010000 called with: %d\n", state); }
-void runHex00100000 (bool state) { printf("runHex00100000 called with: %d\n", state); }
-void runHex01000000 (bool state) { printf("runHex01000000 called with: %d\n", state); }
-void runHex10000000 (bool state) { printf("runHex10000000 called with: %d\n", state); }
-enum HEX_OPS currentOp = HEX_OPS_SET;
-void setOp (enum HEX_OPS op) {
-    currentOp = op;
-    led_op_set = false;
-    led_op_add = false;
-    led_op_sub = false;
-    led_op_xor = false;
-    switch (op) {
-        case HEX_OPS_SET: led_op_set = true; break;
-        case HEX_OPS_ADD: led_op_add = true; break;
-        case HEX_OPS_SUB: led_op_sub = true; break;
-        case HEX_OPS_XOR: led_op_xor = true; break;
-        default: break;
-    }
-}
-void opSet (bool state) { printf("opSet called with: %d\n", state); setOp(HEX_OPS_SET); }
-void opAdd (bool state) { printf("opAdd called with: %d\n", state); setOp(HEX_OPS_ADD); }
-void opSub (bool state) { printf("opSub called with: %d\n", state); setOp(HEX_OPS_SUB); }
-void opXor (bool state) { printf("opXor called with: %d\n", state); setOp(HEX_OPS_XOR); }
-uint8_t currentMem = 0;
-void setMem (uint8_t index) {
-    currentMem = index;
-    led_mem_0 = false;
-    led_mem_1 = false;
-    led_mem_2 = false;
-    led_mem_3 = false;
-    switch (index) {
-        case 0: led_mem_0 = true; break;
-        case 1: led_mem_1 = true; break;
-        case 2: led_mem_2 = true; break;
-        case 3: led_mem_3 = true; break;
-        default: break;
-    }
-}
-void mem0 (bool state) { printf("mem0 called with: %d\n", state); setMem(0); }
-void mem1 (bool state) { printf("mem1 called with: %d\n", state); setMem(1); }
-void mem2 (bool state) { printf("mem2 called with: %d\n", state); setMem(2); }
-void mem3 (bool state) { printf("mem3 called with: %d\n", state); setMem(3); }
 
 #define ARROWS_X 24
 #define ARROWS_Y 359
@@ -172,7 +126,7 @@ struct Button buttons[] = {
         .handler = runHex00000001,
         .has_led = true,
         .led = {
-            .state = &key_hex_00000001,
+            .state = &led_hex_00000001,
             .point = { .x = 415, .y = 319 }
         }
     },
@@ -184,7 +138,7 @@ struct Button buttons[] = {
         .handler = runHex00000010,
         .has_led = true,
         .led = {
-            .state = &key_hex_00000010,
+            .state = &led_hex_00000010,
             .point = { .x = 375, .y = 319 }
         }
     },
@@ -196,7 +150,7 @@ struct Button buttons[] = {
         .handler = runHex00000100,
         .has_led = true,
         .led = {
-            .state = &key_hex_00000100,
+            .state = &led_hex_00000100,
             .point = { .x = 335, .y = 319 }
         }
     },
@@ -208,7 +162,7 @@ struct Button buttons[] = {
         .handler = runHex00001000,
         .has_led = true,
         .led = {
-            .state = &key_hex_00001000,
+            .state = &led_hex_00001000,
             .point = { .x = 295, .y = 319 }
         }
     },
@@ -220,7 +174,7 @@ struct Button buttons[] = {
         .handler = runHex00010000,
         .has_led = true,
         .led = {
-            .state = &key_hex_00010000,
+            .state = &led_hex_00010000,
             .point = { .x = 255, .y = 319 }
         }
     },
@@ -232,7 +186,7 @@ struct Button buttons[] = {
         .handler = runHex00100000,
         .has_led = true,
         .led = {
-            .state = &key_hex_00100000,
+            .state = &led_hex_00100000,
             .point = { .x = 215, .y = 319 }
         }
     },
@@ -244,7 +198,7 @@ struct Button buttons[] = {
         .handler = runHex01000000,
         .has_led = true,
         .led = {
-            .state = &key_hex_01000000,
+            .state = &led_hex_01000000,
             .point = { .x = 175, .y = 319 }
         }
     },
@@ -256,7 +210,7 @@ struct Button buttons[] = {
         .handler = runHex10000000,
         .has_led = true,
         .led = {
-            .state = &key_hex_10000000,
+            .state = &led_hex_10000000,
             .point = { .x = 135, .y = 319 }
         }
     },
@@ -364,7 +318,7 @@ void sdl_quit (bool state) {
 
 void toggleHexEditor (bool state) {
     if (state) {
-        printf("-HexEditor should be toggled");
+        printf("-HexEditor should be toggled\n");
         led_hex_toggle = !led_hex_toggle;
     }
 }
