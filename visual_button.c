@@ -57,6 +57,13 @@ void initButtons (SDL_Renderer *renderer) {
     SDL_SetRenderTarget(renderer, NULL);
 }
 
+void unloadButtons () {
+    SDL_DestroyTexture(buttonTexture);
+    SDL_DestroyTexture(ledTexture);
+    buttonTexture = NULL;
+    ledTexture = NULL;
+}
+
 void drawButton (SDL_Renderer *renderer, bool state, SDL_Point *position) {
     if (buttonTexture == NULL) {
         printf("visual_button.c: initButton MUST be called before drawButton!\nEXITING ANGRILY!\n");

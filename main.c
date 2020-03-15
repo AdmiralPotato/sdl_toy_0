@@ -4,12 +4,20 @@
 #include <SDL_image.h>
 
 #include "visual_button.h"
+#include "font.h"
 #include "character.h"
 #include "frame.h"
 
 int widthFrame = 544;
 int heightFrame = 400;
 bool loop = true;
+char mutableString[] = "!@#$%^&*()_+{}:\"<>?\\|0123456789\nWhat's up muh goats!!!\nI hope you are all having a great night!YOU WILL BE LICKED BY A GOAT TODAY\n\nso watch out\n\nor don't, your choice\nBut this line won't be rendered at all";
+SDL_Rect stringDestinationRect = {
+    .x = 16,
+    .y = 32,
+    .w = 250,
+    .h = 96
+};
 
 SDL_Window *window;
 SDL_Renderer *renderer;
@@ -29,6 +37,8 @@ SDL_Texture *gameTexture;
 
 void quit (int exitCode) {
     loop = false;
+    unloadButtons();
+    unloadFont();
     unloadFrame();
     unloadCharacter();
     SDL_DestroyWindow(window);
@@ -100,6 +110,7 @@ int main () {
     );
 
     initButtons(renderer);
+    initFont(renderer);
     initFrame(renderer);
     initCharacter(renderer);
 
@@ -118,6 +129,12 @@ int main () {
         SDL_RenderClear(renderer);
 
         drawCharacter(renderer);
+
+        drawString(
+            renderer,
+            mutableString,
+            &stringDestinationRect
+        );
 
         // draw isolated gameTexture back on to window texture
         SDL_SetRenderTarget(renderer, NULL);
