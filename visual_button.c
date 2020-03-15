@@ -38,18 +38,18 @@ void initButtons (SDL_Renderer *renderer) {
     );
 
     SDL_SetRenderTarget(renderer, buttonTexture);
-    SDL_SetRenderDrawColor(renderer, 0x33, 0x33, 0x33, 0xFF);
+    SDL_SetRenderDrawColor(renderer, 0x22, 0x22, 0x22, 0xFF);
     SDL_RenderFillRect(renderer, &buttonStateOffRect);
     SDL_RenderFillRect(renderer, &buttonStateOnRect);
 
-    SDL_SetRenderDrawColor(renderer, 0x44, 0x44, 0x44, 0xFF);
+    SDL_SetRenderDrawColor(renderer, 0x33, 0x33, 0x33, 0xFF);
     SDL_RenderFillRect(renderer, &workingRect);
     workingRect.x += BUTTON_SIZE;
     SDL_SetRenderDrawColor(renderer, 0xaa, 0xaa, 0xaa, 0xFF);
     SDL_RenderFillRect(renderer, &workingRect);
 
     SDL_SetRenderTarget(renderer, ledTexture);
-    SDL_SetRenderDrawColor(renderer, 0x33, 0x33, 0x33, 0xFF);
+    SDL_SetRenderDrawColor(renderer, 0x22, 0x22, 0x22, 0xFF);
     SDL_RenderFillRect(renderer, &ledStateOffRect);
     SDL_SetRenderDrawColor(renderer, 0xFF, 0x66, 0x66, 0xFF);
     SDL_RenderFillRect(renderer, &ledStateOnRect);
