@@ -17,7 +17,7 @@ bool key_right = false;
 bool key_shift = false;
 
 bool key_hex_toggle = false;
-bool led_hex_toggle = true;
+bool led_hex_toggle = false;
 
 bool key_hex_00000001 = false;
 bool led_hex_00000001 = false;

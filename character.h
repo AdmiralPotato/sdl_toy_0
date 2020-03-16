@@ -14,6 +14,7 @@
 #define CHARACTER_WIDTH S_1
 
 extern SDL_Rect gameRect;
+extern SDL_Rect playerRect;
 
 extern void quit (int exitCode);
 

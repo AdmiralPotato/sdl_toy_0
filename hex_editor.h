@@ -19,9 +19,14 @@
 
 extern SDL_Rect gameRectInternal;
 
+size_t intSize;
+
 extern uint8_t currentByteAddress;
 
 extern char mutableString[129];
+
+extern void intToStringOffset (int *n, uint8_t offset);
+extern void stringOffsetToInt (int *n, uint8_t offset);
 
 extern void runHex00000001 (bool state);
 extern void runHex00000010 (bool state);
@@ -48,6 +53,8 @@ extern void mem2 (bool state);
 extern void mem3 (bool state);
 
 void initHexEditor (SDL_Renderer *renderer);
+
+extern void updateHexLights ();
 
 void updateHexEditor ();
 

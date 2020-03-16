@@ -7,6 +7,8 @@
 
 uint8_t currentByteAddress = 0;
 
+size_t intSize = sizeof(int);
+
 SDL_Rect byteHighlightRects[HEX_BYTES];
 SDL_Rect byteFontRects[HEX_BYTES];
 
@@ -20,6 +22,21 @@ char hexOpNames[4][12] = {
 enum HEX_OPS currentOp = HEX_OPS_SET;
 uint8_t currentMem = 0;
 uint8_t mems[] = { 0, 0, 0, 0 };
+
+extern void intToStringOffset (int *n, uint8_t offset) {
+    memcpy(
+        mutableString + offset,
+        n,
+        intSize
+    );
+}
+extern void stringOffsetToInt (int *n, uint8_t offset) {
+    memcpy(
+        n,
+        mutableString + offset,
+        intSize
+    );
+}
 
 void updateHexLights () {
     uint8_t value = mutableString[currentByteAddress];

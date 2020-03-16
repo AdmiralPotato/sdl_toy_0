@@ -123,19 +123,29 @@ int main () {
     while (loop) {
         handleEventsSinceLastTick();
 
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-        SDL_RenderClear(renderer);
-        drawFrame(renderer);
-        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
-        // use isolated gameTexture for rendering
-        SDL_SetRenderTarget(renderer, gameTexture);
-        SDL_RenderClear(renderer);
+        stringOffsetToInt(&playerRect.x,HEX_BYTES - (intSize * 2));
+        stringOffsetToInt(&playerRect.y, HEX_BYTES - (intSize * 1));
 
         if (led_hex_toggle) {
             updateHexEditor();
         } else {
             updateCharacter();
         }
+
+        intToStringOffset(&playerRect.x,HEX_BYTES - (intSize * 2));
+        intToStringOffset(&playerRect.y, HEX_BYTES - (intSize * 1));
+
+        updateHexLights();
+
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+        SDL_RenderClear(renderer);
+        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+        drawFrame(renderer);
+
+        // use isolated gameTexture for rendering
+        SDL_SetRenderTarget(renderer, gameTexture);
+        SDL_RenderClear(renderer);
+
         drawCharacter(renderer);
 
         drawString(
