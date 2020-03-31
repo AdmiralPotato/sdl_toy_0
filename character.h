@@ -15,6 +15,8 @@
 
 extern SDL_Rect gameRect;
 extern SDL_Rect playerRect;
+extern uint16_t playerX;
+extern uint16_t playerY;
 
 extern void quit (int exitCode);
 

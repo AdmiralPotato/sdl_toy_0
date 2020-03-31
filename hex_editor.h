@@ -20,6 +20,7 @@
 extern SDL_Rect gameRectInternal;
 
 size_t intSize;
+size_t int16Size;
 
 extern uint8_t currentByteAddress;
 
@@ -27,6 +28,8 @@ extern char mutableString[129];
 
 extern void intToStringOffset (int *n, uint8_t offset);
 extern void stringOffsetToInt (int *n, uint8_t offset);
+extern void int16ToStringOffset (uint16_t *n, uint8_t offset);
+extern void stringOffsetToInt16 (uint16_t *n, uint8_t offset);
 
 extern void runHex00000001 (bool state);
 extern void runHex00000010 (bool state);

@@ -123,8 +123,8 @@ int main () {
     while (loop) {
         handleEventsSinceLastTick();
 
-        stringOffsetToInt(&playerRect.x,HEX_BYTES - (intSize * 2));
-        stringOffsetToInt(&playerRect.y, HEX_BYTES - (intSize * 1));
+        stringOffsetToInt16(&playerX, HEX_BYTES - (int16Size * 2));
+        stringOffsetToInt16(&playerY, HEX_BYTES - (int16Size * 1));
 
         if (led_hex_toggle) {
             updateHexEditor();
@@ -132,8 +132,8 @@ int main () {
             updateCharacter();
         }
 
-        intToStringOffset(&playerRect.x,HEX_BYTES - (intSize * 2));
-        intToStringOffset(&playerRect.y, HEX_BYTES - (intSize * 1));
+        int16ToStringOffset(&playerX, HEX_BYTES - (int16Size * 2));
+        int16ToStringOffset(&playerY, HEX_BYTES - (int16Size * 1));
 
         updateHexLights();
 

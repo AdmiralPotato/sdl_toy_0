@@ -8,6 +8,7 @@
 uint8_t currentByteAddress = 0;
 
 size_t intSize = sizeof(int);
+size_t int16Size = sizeof(uint16_t);
 
 SDL_Rect byteHighlightRects[HEX_BYTES];
 SDL_Rect byteFontRects[HEX_BYTES];
@@ -35,6 +36,20 @@ extern void stringOffsetToInt (int *n, uint8_t offset) {
         n,
         mutableString + offset,
         intSize
+    );
+}
+extern void int16ToStringOffset (uint16_t *n, uint8_t offset) {
+    memcpy(
+        mutableString + offset,
+        n,
+        int16Size
+    );
+}
+extern void stringOffsetToInt16 (uint16_t *n, uint8_t offset) {
+    memcpy(
+        n,
+        mutableString + offset,
+        int16Size
     );
 }
 
