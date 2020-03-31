@@ -11,20 +11,12 @@ SDL_Texture *characterTexture;
 SDL_Rect spriteRects[16] = {
         {.x =  S_0, .y =  S_0, .w =  S_1, .h =  S_1},
         {.x =  S_1, .y =  S_0, .w =  S_1, .h =  S_1},
-        {.x =  S_2, .y =  S_0, .w =  S_1, .h =  S_1},
-        {.x =  S_3, .y =  S_0, .w =  S_1, .h =  S_1},
         {.x =  S_0, .y =  S_1, .w =  S_1, .h =  S_1},
         {.x =  S_1, .y =  S_1, .w =  S_1, .h =  S_1},
-        {.x =  S_2, .y =  S_1, .w =  S_1, .h =  S_1},
-        {.x =  S_3, .y =  S_1, .w =  S_1, .h =  S_1},
         {.x =  S_0, .y =  S_2, .w =  S_1, .h =  S_1},
         {.x =  S_1, .y =  S_2, .w =  S_1, .h =  S_1},
-        {.x =  S_2, .y =  S_2, .w =  S_1, .h =  S_1},
-        {.x =  S_3, .y =  S_2, .w =  S_1, .h =  S_1},
         {.x =  S_0, .y =  S_3, .w =  S_1, .h =  S_1},
         {.x =  S_1, .y =  S_3, .w =  S_1, .h =  S_1},
-        {.x =  S_2, .y =  S_3, .w =  S_1, .h =  S_1},
-        {.x =  S_3, .y =  S_3, .w =  S_1, .h =  S_1}
 };
 
 SDL_Rect playerRect;
@@ -32,8 +24,8 @@ SDL_Rect playerRect;
 uint8_t sprite_frame = 0;
 uint8_t sprite_direction = 0;
 uint8_t movement_speed = 0;
-uint8_t walk_speed = 4;
-uint8_t run_speed = 8;
+uint8_t walk_speed = 2;
+uint8_t run_speed = 4;
 bool any_movement = false;
 
 void initCharacter (SDL_Renderer *renderer) {
@@ -41,7 +33,7 @@ void initCharacter (SDL_Renderer *renderer) {
     playerRect.y = gameRect.h / 2;
     playerRect.h = CHARACTER_WIDTH;
     playerRect.w = CHARACTER_WIDTH;
-    characterSurface = IMG_Load("sans_sprite_uniform.png");
+    characterSurface = IMG_Load("data/black_mage-tiny.png");
     if (!characterSurface) {
         printf("IMG_Load: %s\n", IMG_GetError());
         quit(1);
@@ -83,7 +75,7 @@ void updateCharacter () {
     }
     if(any_movement) {
         sprite_frame += 1;
-        sprite_frame %= 4;
+        sprite_frame %= 2;
     }
 }
 

@@ -324,7 +324,7 @@ void toggleHexEditor (bool state) {
 }
 
 void initFrame (SDL_Renderer *renderer) {
-    frameSurface = IMG_Load("frame.png");
+    frameSurface = IMG_Load("data/frame.png");
     if (!frameSurface) {
         printf("IMG_Load: %s\n", IMG_GetError());
         quit(1);

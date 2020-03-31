@@ -5,7 +5,7 @@
 
 #include "frame.h"
 
-#define SPRITE_SIZE 32
+#define SPRITE_SIZE 16
 
 #define S_0 0
 #define S_1 SPRITE_SIZE * 1

@@ -6,7 +6,7 @@
 #include "frame.h"
 
 
-#define FONT_NAME "font-monaco_9-6x12-transparent.png"
+#define FONT_NAME "data/font-monaco_9-6x12-transparent.png"
 #define FONT_W 6
 #define FONT_H 12
 #define FONT_SHEET_WIDTH 32

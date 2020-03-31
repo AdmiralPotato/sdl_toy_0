@@ -22,8 +22,8 @@ file(GLOB SOURCES
 )
 file(
     COPY
-    ${CMAKE_CURRENT_SOURCE_DIR}/images/
-    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/data/
+    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/data/
 )
 
 add_executable(sdl_toy_0 ${SOURCES})
