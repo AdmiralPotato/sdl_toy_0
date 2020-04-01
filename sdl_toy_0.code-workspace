@@ -9,7 +9,10 @@
 			"cstdlib": "c",
 			"cmath": "c",
 			"*.tcc": "c",
-			"typeinfo": "c"
+			"typeinfo": "c",
+			"tmx.h": "c",
+			"sdl_image.h": "c",
+			"sdl.h": "c"
 		}
 	}
 }

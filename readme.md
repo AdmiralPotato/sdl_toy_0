@@ -1,6 +1,6 @@
 # Setup
 ```bash
-sudo apt-get install libsdl2-2.0 libsdl2-image-2.0 libsdl2-dev libsdl2-image-dev clang calng-tidy
+sudo apt-get install libsdl2-2.0 libsdl2-image-2.0 libsdl2-dev libsdl2-image-dev libxml2 libxml2-dev clang calng-tidy
 
 # run cmake to generate build config and scripts
 rm -rf build # if it's there already
