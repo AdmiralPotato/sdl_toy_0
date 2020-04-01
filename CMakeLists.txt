@@ -5,8 +5,10 @@ set(CMAKE_C_COMPILER clang)
 set(CMAKE_CXX_COMPILER clang)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_C_CLANG_TIDY clang-tidy)
-set(CMAKE_CXX_CLANG_TIDY clang-tidy)
+if(NOT WIN32)
+    set(CMAKE_C_CLANG_TIDY clang-tidy)
+    set(CMAKE_CXX_CLANG_TIDY clang-tidy)
+endif(NOT WIN32)
 
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
