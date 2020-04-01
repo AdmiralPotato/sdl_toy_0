@@ -6,6 +6,7 @@
 #include "visual_button.h"
 #include "font.h"
 #include "character.h"
+#include "map.h"
 #include "frame.h"
 #include "hex_editor.h"
 
@@ -41,6 +42,7 @@ void quit (int exitCode) {
     unloadButtons();
     unloadFont();
     unloadFrame();
+    unloadMap();
     unloadCharacter();
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -113,6 +115,7 @@ int main () {
     initButtons(renderer);
     initFont(renderer);
     initFrame(renderer);
+    initMap(renderer);
     initCharacter(renderer);
     initHexEditor(renderer);
 
@@ -130,6 +133,7 @@ int main () {
             updateHexEditor();
         } else {
             updateCharacter();
+            updateMap();
         }
 
         int16ToStringOffset(&playerX, HEX_BYTES - (int16Size * 2));
@@ -146,6 +150,7 @@ int main () {
         SDL_SetRenderTarget(renderer, gameTexture);
         SDL_RenderClear(renderer);
 
+        drawMap(renderer);
         drawCharacter(renderer);
 
         drawString(
