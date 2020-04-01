@@ -17,12 +17,12 @@ find_package(SDL2_image REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
 
 file(GLOB SOURCES
-    "./*.h"
-    "./*.c"
+    "./src/*.h"
+    "./src/*.c"
 )
 file(
     COPY
-    ${CMAKE_CURRENT_SOURCE_DIR}/data/
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/data/
     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/data/
 )
 
