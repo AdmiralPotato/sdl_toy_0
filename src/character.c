@@ -4,6 +4,7 @@
 #include <SDL_image.h>
 
 #include "character.h"
+#include "hex_editor.h"
 
 SDL_Surface *characterSurface;
 SDL_Texture *characterTexture;
@@ -20,8 +21,8 @@ SDL_Rect spriteRects[16] = {
 };
 
 SDL_Rect playerRect;
-uint16_t playerX = 16;
-uint16_t playerY = 16;
+uint16_t playerX = 32;
+uint16_t playerY = 32;
 
 uint8_t sprite_frame = 0;
 uint8_t sprite_direction = 0;
@@ -31,8 +32,8 @@ uint8_t run_speed = 4;
 bool any_movement = false;
 
 void initCharacter (SDL_Renderer *renderer) {
-    playerX = gameRect.w / 2;
-    playerY = gameRect.h / 2;
+    playerRect.x = gameRect.w / 2 - S_05;
+    playerRect.y = gameRect.h / 2 - S_05;
     playerRect.h = CHARACTER_WIDTH;
     playerRect.w = CHARACTER_WIDTH;
     characterSurface = IMG_Load("data/black_mage-tiny.png");
@@ -60,19 +61,19 @@ void updateCharacter () {
     );
     movement_speed = key_shift ? run_speed : walk_speed;
     if(key_left) {
-        playerX = (playerX - movement_speed + gameRect.w) % gameRect.w;
+        playerX = (playerX - movement_speed + mapRect.w) % mapRect.w;
         sprite_direction = 4;
     }
     if(key_right) {
-        playerX = (playerX + movement_speed) % gameRect.w;
+        playerX = (playerX + movement_speed) % mapRect.w;
         sprite_direction = 6;
     }
     if(key_up) {
-        playerY = (playerY - movement_speed + gameRect.h) % gameRect.h;
+        playerY = (playerY - movement_speed + mapRect.h) % mapRect.h;
         sprite_direction = 2;
     }
     if(key_down) {
-        playerY = (playerY + movement_speed) % gameRect.h;
+        playerY = (playerY + movement_speed) % mapRect.h;
         sprite_direction = 0;
     }
     if(any_movement) {
@@ -89,8 +90,6 @@ void drawCharacter (SDL_Renderer *renderer) {
     //     sprite_frame,
     //     sprite_direction
     // );
-    playerRect.x = playerX;
-    playerRect.y = playerY;
     SDL_RenderCopy(
         renderer,
         characterTexture,

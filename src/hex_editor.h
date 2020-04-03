@@ -17,7 +17,12 @@
 #define HEX_CELL_TEXT_H 12
 #define HEX_TICK_DELAY 1
 
-extern SDL_Rect gameRectInternal;
+#define HEX_OFFSET_PLAYERX HEX_BYTES - (int16Size * 2)
+#define HEX_OFFSET_PLAYERY HEX_BYTES - (int16Size * 1)
+
+extern SDL_Rect gameRect;
+extern uint16_t playerX;
+extern uint16_t playerY;
 
 size_t intSize;
 size_t int16Size;

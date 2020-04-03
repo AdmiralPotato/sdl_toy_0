@@ -10,6 +10,9 @@
 #include "frame.h"
 #include "hex_editor.h"
 
+#define GAME_WIDTH 320
+#define GAME_HEIGHT 240
+
 int widthFrame = 544;
 int heightFrame = 400;
 bool loop = true;
@@ -17,23 +20,29 @@ char mutableString[129] = "Hello Dankness My Old Friend";
 SDL_Rect stringDestinationRect = {
     .x = 16,
     .y = 16,
-    .w = 320 - 32,
-    .h = 240 - 32
+    .w = GAME_WIDTH - 32,
+    .h = GAME_HEIGHT - 32
 };
 
 SDL_Window *window;
 SDL_Renderer *renderer;
-SDL_Rect gameRect = {
+SDL_Rect gameRectExternal = {
     .x = 112,
     .y = 56,
-    .w = 320,
-    .h = 240,
+    .w = GAME_WIDTH,
+    .h = GAME_HEIGHT
 };
-SDL_Rect gameRectInternal = {
+SDL_Rect gameRect = {
         .x = 0,
         .y = 0,
-        .w = 320,
-        .h = 240,
+        .w = GAME_WIDTH,
+        .h = GAME_HEIGHT
+};
+SDL_Rect gameRectHalf = {
+        .x = 0,
+        .y = 0,
+        .w = GAME_WIDTH / 2,
+        .h = GAME_HEIGHT / 2
 };
 SDL_Texture *gameTexture;
 
@@ -105,11 +114,11 @@ int main () {
     );
 
     gameTexture = SDL_CreateTexture(
-        renderer,
-        SDL_PIXELFORMAT_RGBA8888,
-        SDL_TEXTUREACCESS_TARGET,
-        gameRect.w,
-        gameRect.h
+            renderer,
+            SDL_PIXELFORMAT_RGBA8888,
+            SDL_TEXTUREACCESS_TARGET,
+            gameRectExternal.w,
+            gameRectExternal.h
     );
 
     initButtons(renderer);
@@ -126,8 +135,8 @@ int main () {
     while (loop) {
         handleEventsSinceLastTick();
 
-        stringOffsetToInt16(&playerX, HEX_BYTES - (int16Size * 2));
-        stringOffsetToInt16(&playerY, HEX_BYTES - (int16Size * 1));
+        stringOffsetToInt16(&playerX, HEX_OFFSET_PLAYERX);
+        stringOffsetToInt16(&playerY, HEX_OFFSET_PLAYERY);
 
         if (led_hex_toggle) {
             updateHexEditor();
@@ -136,8 +145,8 @@ int main () {
             updateMap();
         }
 
-        int16ToStringOffset(&playerX, HEX_BYTES - (int16Size * 2));
-        int16ToStringOffset(&playerY, HEX_BYTES - (int16Size * 1));
+        int16ToStringOffset(&playerX, HEX_OFFSET_PLAYERX);
+        int16ToStringOffset(&playerY, HEX_OFFSET_PLAYERY);
 
         updateHexLights();
 
@@ -168,8 +177,8 @@ int main () {
         SDL_RenderCopy(
             renderer,
             gameTexture,
-            &gameRectInternal,
-            &gameRect
+            &gameRect,
+            &gameRectExternal
         );
 
         SDL_RenderPresent(renderer);

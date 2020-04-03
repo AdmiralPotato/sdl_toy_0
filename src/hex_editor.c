@@ -4,6 +4,7 @@
 
 #include "hex_editor.h"
 #include "font.h"
+#include "map.h"
 
 uint8_t currentByteAddress = 0;
 
@@ -152,6 +153,8 @@ void initHexEditor (SDL_Renderer *renderer) {
         byteFontRects[i].w = HEX_CELL_TEXT_W;
         byteFontRects[i].h = HEX_CELL_TEXT_H;
     }
+    int16ToStringOffset(&playerX, HEX_OFFSET_PLAYERX);
+    int16ToStringOffset(&playerY, HEX_OFFSET_PLAYERY);
     updateHexLights();
 }
 
@@ -192,7 +195,7 @@ void getHexStringForByte (uint8_t byte, char* outputString) {
 
 void drawHexEditor (SDL_Renderer *renderer, char* string) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 220);
-    SDL_RenderFillRect(renderer, &gameRectInternal);
+    SDL_RenderFillRect(renderer, &gameRect);
 
     SDL_SetRenderDrawColor(renderer, 64, 64, 255, 255);
     SDL_RenderFillRect(

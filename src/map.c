@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <math.h>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <tmx.h>
@@ -10,7 +11,9 @@ tmx_map *map = NULL;
 static SDL_Renderer *ren = NULL;
 SDL_Texture *mapTexture;
 SDL_Texture *map_bmp;
-SDL_Rect map_rect;
+SDL_Rect mapRect;
+SDL_Rect mapSrcRect;
+SDL_Rect mapDestRect;
 
 void fatal_error (char* message) {
     printf("FATAL ERROR: %s\n", message);
@@ -166,13 +169,22 @@ void initMap (SDL_Renderer *renderer) {
     }
     printf("Map Loaded: %s\n", MAP_FILE);
 
-    map_rect.w = map->width  * map->tile_width;
-    map_rect.h = map->height * map->tile_height;
-    map_rect.x = 0;  map_rect.y = 0;
+    mapRect.w = map->width * map->tile_width;
+    mapRect.h = map->height * map->tile_height;
+    mapRect.x = 0; mapRect.y = 0;
 
     if (!(map_bmp = render_map(map))){
         fatal_error(SDL_GetError());
     }
+
+    mapSrcRect.x = gameRect.x;
+    mapSrcRect.y = gameRect.y;
+    mapSrcRect.w = gameRect.w;
+    mapSrcRect.h = gameRect.h;
+    mapDestRect.x = gameRect.x;
+    mapDestRect.y = gameRect.y;
+    mapDestRect.w = gameRect.w;
+    mapDestRect.h = gameRect.h;
 
 }
 
@@ -183,14 +195,22 @@ void unloadMap () {
 }
 
 void updateMap () {
+    mapSrcRect.x = (int) fmax(playerX - gameRectHalf.w, 0);
+    mapSrcRect.y = (int) fmax(playerY - gameRectHalf.h, 0);
+    mapSrcRect.w = (int) fmin(mapRect.w - playerX + gameRectHalf.w, gameRect.w);
+    mapSrcRect.h = (int) fmin(mapRect.h - playerY + gameRectHalf.h, gameRect.h);
 
+    mapDestRect.x = (int) fmax(gameRectHalf.w - playerX, 0);
+    mapDestRect.y = (int) fmax(gameRectHalf.h - playerY, 0);
+    mapDestRect.w = mapSrcRect.w;
+    mapDestRect.h = mapSrcRect.h;
 }
 
 void drawMap (SDL_Renderer *renderer) {
     SDL_RenderCopy(
         renderer,
         map_bmp,
-        &gameRectInternal,
-        &gameRectInternal
+        &mapSrcRect,
+        &mapDestRect
     );
 }

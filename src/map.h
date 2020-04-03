@@ -6,7 +6,11 @@
 
 #define MAP_FILE "data/dungeon.tmx"
 
-extern SDL_Rect gameRectInternal;
+extern uint16_t playerX;
+extern uint16_t playerY;
+
+extern SDL_Rect gameRect;
+extern SDL_Rect gameRectHalf;
 extern void quit (int exitCode);
 
 void initMap (SDL_Renderer *renderer);
