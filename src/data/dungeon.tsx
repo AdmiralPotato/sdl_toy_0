@@ -1,439 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.2" tiledversion="1.3.2" name="dungeon" tilewidth="16" tileheight="16" tilecount="247" columns="19">
+<tileset version="1.2" tiledversion="1.3.3" name="dungeon" tilewidth="16" tileheight="16" tilecount="247" columns="19">
  <image source="dungeon_tile_sheet.png" width="304" height="208"/>
- <tile id="0">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="1">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="2">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="3">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="4">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="5">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="19">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="20">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="21">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="22">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="23">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="24">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="38">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="39">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="40">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="41">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="42">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="43">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="57">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="58">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="59">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="60">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="61">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="62">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="73">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="74">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="76">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="77">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="78">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="79">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="80">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="82">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="83">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="84">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="85">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="86">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="92">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="93">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="95">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="96">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="101">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="102">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="103">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="104">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="105">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="111">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="112">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="114">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="115">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="119">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="120">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="121">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="122">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="123">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="124">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="125">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="126">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="130">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="131">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="142">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="143">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="144">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="145">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="149">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="150">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="161">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="162">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="163">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="164">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="168">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="169">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="182">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="183">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="186">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="187">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="188">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="201">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="202">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="205">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="206">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="207">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="224">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="225">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="226">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="243">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="244">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="245">
-  <properties>
-   <property name="block" type="bool" value="true"/>
-  </properties>
- </tile>
+ <tile id="0" type="wall"/>
+ <tile id="1" type="wall"/>
+ <tile id="2" type="wall"/>
+ <tile id="3" type="wall"/>
+ <tile id="4" type="wall"/>
+ <tile id="13" type="pot"/>
+ <tile id="14" type="pot"/>
+ <tile id="15" type="pot"/>
+ <tile id="19" type="wall"/>
+ <tile id="21" type="wall"/>
+ <tile id="22" type="wall"/>
+ <tile id="23" type="wall"/>
+ <tile id="24" type="wall"/>
+ <tile id="32" type="pot"/>
+ <tile id="33" type="pot"/>
+ <tile id="34" type="pot"/>
+ <tile id="38" type="wall"/>
+ <tile id="39" type="wall"/>
+ <tile id="40" type="wall"/>
+ <tile id="42" type="wall"/>
+ <tile id="43" type="wall"/>
+ <tile id="57" type="wall"/>
+ <tile id="58" type="wall"/>
+ <tile id="59" type="wall"/>
+ <tile id="60" type="wall"/>
+ <tile id="70" type="wall"/>
+ <tile id="71" type="wall"/>
+ <tile id="72" type="wall"/>
+ <tile id="73" type="wall"/>
+ <tile id="74" type="wall"/>
+ <tile id="76" type="wall"/>
+ <tile id="77" type="wall"/>
+ <tile id="78" type="wall"/>
+ <tile id="79" type="wall"/>
+ <tile id="80" type="wall"/>
+ <tile id="81" type="door"/>
+ <tile id="82" type="wall"/>
+ <tile id="83" type="wall"/>
+ <tile id="84" type="wall"/>
+ <tile id="85" type="wall"/>
+ <tile id="86" type="wall"/>
+ <tile id="89" type="wall"/>
+ <tile id="90" type="wall"/>
+ <tile id="91" type="wall"/>
+ <tile id="92" type="wall"/>
+ <tile id="93" type="wall"/>
+ <tile id="95" type="wall"/>
+ <tile id="96" type="wall"/>
+ <tile id="100" type="door"/>
+ <tile id="101" type="wall"/>
+ <tile id="102" type="wall"/>
+ <tile id="103" type="wall"/>
+ <tile id="104" type="wall"/>
+ <tile id="105" type="wall"/>
+ <tile id="108" type="wall"/>
+ <tile id="109" type="wall"/>
+ <tile id="110" type="wall"/>
+ <tile id="111" type="wall"/>
+ <tile id="112" type="wall"/>
+ <tile id="114" type="wall"/>
+ <tile id="115" type="wall"/>
+ <tile id="116" type="door"/>
+ <tile id="117" type="door"/>
+ <tile id="118" type="door"/>
+ <tile id="119" type="wall"/>
+ <tile id="120" type="wall"/>
+ <tile id="121" type="wall"/>
+ <tile id="122" type="wall"/>
+ <tile id="123" type="wall"/>
+ <tile id="124" type="wall"/>
+ <tile id="125" type="wall"/>
+ <tile id="126" type="wall"/>
+ <tile id="127" type="wall"/>
+ <tile id="128" type="wall"/>
+ <tile id="129" type="wall"/>
+ <tile id="130" type="wall"/>
+ <tile id="131" type="wall"/>
+ <tile id="139" type="door"/>
+ <tile id="140" type="door"/>
+ <tile id="141" type="door"/>
+ <tile id="142" type="wall"/>
+ <tile id="143" type="wall"/>
+ <tile id="144" type="wall"/>
+ <tile id="145" type="wall"/>
+ <tile id="146" type="wall"/>
+ <tile id="147" type="wall"/>
+ <tile id="148" type="wall"/>
+ <tile id="149" type="wall"/>
+ <tile id="150" type="wall"/>
+ <tile id="152" type="door"/>
+ <tile id="153" type="door"/>
+ <tile id="154" type="door"/>
+ <tile id="155" type="door"/>
+ <tile id="156" type="door"/>
+ <tile id="157" type="door"/>
+ <tile id="161" type="wall"/>
+ <tile id="162" type="wall"/>
+ <tile id="163" type="wall"/>
+ <tile id="164" type="wall"/>
+ <tile id="165" type="wall"/>
+ <tile id="166" type="wall"/>
+ <tile id="168" type="wall"/>
+ <tile id="169" type="wall"/>
+ <tile id="171" type="door"/>
+ <tile id="173" type="door"/>
+ <tile id="175" type="door"/>
+ <tile id="177" type="door"/>
+ <tile id="178" type="door"/>
+ <tile id="179" type="door"/>
+ <tile id="181" type="door"/>
+ <tile id="182" type="wall"/>
+ <tile id="183" type="wall"/>
+ <tile id="186" type="wall"/>
+ <tile id="187" type="wall"/>
+ <tile id="188" type="wall"/>
+ <tile id="190" type="door"/>
+ <tile id="192" type="door"/>
+ <tile id="194" type="door"/>
+ <tile id="200" type="door"/>
+ <tile id="201" type="wall"/>
+ <tile id="202" type="wall"/>
+ <tile id="205" type="wall"/>
+ <tile id="206" type="wall"/>
+ <tile id="207" type="wall"/>
+ <tile id="209" type="door"/>
+ <tile id="211" type="door"/>
+ <tile id="213" type="door"/>
+ <tile id="215" type="door"/>
+ <tile id="216" type="door"/>
+ <tile id="217" type="door"/>
+ <tile id="219" type="door"/>
+ <tile id="221" type="door"/>
+ <tile id="224" type="wall"/>
+ <tile id="225" type="wall"/>
+ <tile id="226" type="wall"/>
+ <tile id="229" type="door"/>
+ <tile id="231" type="door"/>
+ <tile id="233" type="door"/>
+ <tile id="238" type="door"/>
+ <tile id="240" type="door"/>
+ <tile id="243" type="wall"/>
+ <tile id="244" type="wall"/>
+ <tile id="245" type="wall"/>
 </tileset>
