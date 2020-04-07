@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <SDL.h>
-#include <SDL_blendmode.h>
 
 #include "hex_editor.h"
 #include "font.h"

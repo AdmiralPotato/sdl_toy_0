@@ -183,6 +183,7 @@ int main () {
 
         SDL_RenderPresent(renderer);
 
+        fflush(stdout); // Smack Windows/CLion console to actually output all printf's this tick
         SDL_Delay(48);
     }
 

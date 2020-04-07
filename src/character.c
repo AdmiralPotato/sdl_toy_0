@@ -5,6 +5,8 @@
 
 #include "character.h"
 #include "hex_editor.h"
+#include "map.h"
+#include "font.h"
 
 SDL_Surface *characterSurface;
 SDL_Texture *characterTexture;
@@ -52,6 +54,10 @@ void unloadCharacter () {
     characterTexture = NULL;
 }
 
+tmx_tile* currentTile = NULL;
+char currentTileType[36] = "none";
+int movementX = 0;
+int movementY = 0;
 void updateCharacter () {
     any_movement = (
         key_up ||
@@ -60,28 +66,50 @@ void updateCharacter () {
         key_right
     );
     movement_speed = key_shift ? run_speed : walk_speed;
+    movementX = 0;
+    movementY = 0;
     if(key_left) {
-        playerX = (playerX - movement_speed + mapRect.w) % mapRect.w;
+        movementX = -movement_speed;
         sprite_direction = 4;
     }
     if(key_right) {
-        playerX = (playerX + movement_speed) % mapRect.w;
+        movementX = movement_speed;
         sprite_direction = 6;
     }
     if(key_up) {
-        playerY = (playerY - movement_speed + mapRect.h) % mapRect.h;
+        movementY = -movement_speed;
         sprite_direction = 2;
     }
     if(key_down) {
-        playerY = (playerY + movement_speed) % mapRect.h;
+        movementY = movement_speed;
         sprite_direction = 0;
     }
     if(any_movement) {
-        sprite_frame += 1;
-        sprite_frame %= 2;
+        sprite_frame = (sprite_frame + 1) % 2;
+        uint16_t nextX = (playerX + movementX + mapRect.w) % mapRect.w;
+        uint16_t nextY = (playerY + movementY + mapRect.h) % mapRect.h;
+        currentTile = getTileByCoordinate(nextX, nextY);
+        if(currentTile) {
+            snprintf(
+                currentTileType,
+                36,
+                "%s",
+                currentTile->type ? currentTile->type : "none"
+            );
+            if (strcmp(currentTileType, "wall") != 0) {
+                playerX = nextX;
+                playerY = nextY;
+            }
+        }
     }
 }
 
+SDL_Rect currentTileTypeNameRect = {
+    .x = 16,
+    .y = 240 - 16,
+    .w = 320 - 32,
+    .h = 16
+};
 void drawCharacter (SDL_Renderer *renderer) {
     // printf(
     //     "x: %d | y: %d | sprite_frame: %d | sprite_direction: %d\n",
@@ -95,5 +123,10 @@ void drawCharacter (SDL_Renderer *renderer) {
         characterTexture,
         &spriteRects[sprite_frame + sprite_direction],
         &playerRect
+    );
+    drawString(
+        renderer,
+        currentTileType,
+        &currentTileTypeNameRect
     );
 }

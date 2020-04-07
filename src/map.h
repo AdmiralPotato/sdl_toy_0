@@ -13,6 +13,8 @@ extern SDL_Rect gameRect;
 extern SDL_Rect gameRectHalf;
 extern void quit (int exitCode);
 
+tmx_tile* getTileByCoordinate (uint16_t x, uint16_t y);
+
 void initMap (SDL_Renderer *renderer);
 
 void unloadMap ();

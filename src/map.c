@@ -157,6 +157,41 @@ SDL_Texture* render_map(tmx_map *map) {
 
 // Almost all of the above came from: `tmx/src/examples/sdl/sdl.c`
 
+unsigned int getTileIndexByCoordinate (uint16_t x, uint16_t y, tmx_map *map) {
+    return (
+        ((y / map->tile_height) * map->width)
+        + (x / map->tile_width)
+    );
+}
+
+unsigned int lastTileIndex = -1; // not likely to be matched, intentional underflow
+tmx_tile* lastTile = NULL;
+tmx_tile* getTileByCoordinate (uint16_t x, uint16_t y) {
+    unsigned int tileIndex = getTileIndexByCoordinate(x, y, map);
+    unsigned int gid;
+    tmx_tile *tile = NULL;
+    tmx_layer *layer = map->ly_head;
+	// if tileIndex is same as last call, no need to look it up again
+    if (tileIndex != lastTileIndex) {
+        while (layer) {
+            if (layer->visible) {
+                if (layer->type == L_LAYER) { // only care about tile-based layers
+                    gid = gid_clear_flags(layer->content.gids[tileIndex]);
+                    if(map->tiles[gid]) {
+                        tile = map->tiles[gid];
+                    }
+                }
+            }
+            layer = layer->next;
+        }
+        lastTileIndex = tileIndex;
+        lastTile = tile;
+    } else {
+        tile = lastTile;
+    }
+    return tile;
+}
+
 void initMap (SDL_Renderer *renderer) {
 
     ren = renderer;
