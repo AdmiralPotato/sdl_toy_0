@@ -1,5 +1,10 @@
 # Setup
+Clone and then `cd` into this repository's folder on your computer
 ```bash
+# requires CMake 3.17 or newer, snap install because apt is way out of data
+sudo snap install cmake --classic
+
+# now the apt deps
 sudo apt-get install libsdl2-2.0 libsdl2-image-2.0 libsdl2-dev libsdl2-image-dev libxml2 libxml2-dev clang calng-tidy
 
 # run cmake to generate build config and scripts
@@ -9,18 +14,18 @@ cd build
 cmake -j3 ..
 ```
 
-## Enfoce a code style
-```bash
-# run from inside build folder
-cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-clang-tidy ../main.c -fix
-```
-
 ## build & run
 ```bash
 # from inside the build folder
 make
 ./sdl_toy_0
+```
+
+## Enfoce a code style
+```bash
+# run from inside build folder
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+clang-tidy ../main.c -fix
 ```
 
 ## Keys:
