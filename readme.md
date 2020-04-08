@@ -5,7 +5,7 @@ Clone and then `cd` into this repository's folder on your computer
 sudo snap install cmake --classic
 
 # now the apt deps
-sudo apt-get install libsdl2-2.0 libsdl2-image-2.0 libsdl2-dev libsdl2-image-dev libxml2 libxml2-dev clang calng-tidy
+sudo apt-get install libsdl2-2.0 libsdl2-image-2.0 libsdl2-dev libsdl2-image-dev libxml2 libxml2-dev clang clang-tidy
 
 # run cmake to generate build config and scripts
 rm -rf build # if it's there already
