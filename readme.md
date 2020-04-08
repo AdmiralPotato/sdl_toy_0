@@ -1,7 +1,7 @@
 # Setup
 Clone and then `cd` into this repository's folder on your computer
 ```bash
-# requires CMake 3.17 or newer, snap install because apt is way out of data
+# requires CMake 3.17 or newer, snap install because apt is way out of date
 sudo snap install cmake --classic
 
 # now the apt deps
