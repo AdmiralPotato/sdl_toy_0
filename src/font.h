@@ -18,4 +18,4 @@ void initFont (SDL_Renderer *renderer);
 
 void unloadFont ();
 
-void drawString (SDL_Renderer *renderer, char* string, SDL_Rect* bounds);
+void drawString (SDL_Renderer *renderer, char* string, SDL_Rect* bounds, float scale);

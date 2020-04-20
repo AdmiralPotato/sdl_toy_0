@@ -165,7 +165,8 @@ int main () {
         drawString(
             renderer,
             mutableString,
-            &stringDestinationRect
+            &stringDestinationRect,
+            1.0f
         );
 
         if (led_hex_toggle) {

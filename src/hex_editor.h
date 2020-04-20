@@ -5,16 +5,16 @@
 
 #include "frame.h"
 
-#define HEX_BYTES 128
-#define HEX_COLUMNS 16
+#define HEX_BYTES 64
+#define HEX_COLUMNS 8
 #define HEX_COLUMN_OFFSET_X 8
 #define HEX_COLUMN_OFFSET_Y 8
-#define HEX_CELL_W 19
-#define HEX_CELL_H 16
-#define HEX_CELL_TEXT_X 4
-#define HEX_CELL_TEXT_Y 2
-#define HEX_CELL_TEXT_W 12
-#define HEX_CELL_TEXT_H 12
+#define HEX_CELL_W 19 * 2
+#define HEX_CELL_H 14 * 2
+#define HEX_CELL_TEXT_X 4 * 2
+#define HEX_CELL_TEXT_Y 1.5f * 2
+#define HEX_CELL_TEXT_W 12 * 2
+#define HEX_CELL_TEXT_H 12 * 2
 #define HEX_TICK_DELAY 1
 
 #define HEX_OFFSET_PLAYERX HEX_BYTES - (int16Size * 2)

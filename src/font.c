@@ -38,7 +38,7 @@ void unloadFont () {
     fontTexture = NULL;
 }
 
-void drawString (SDL_Renderer *renderer, char* string, SDL_Rect* bounds) {
+void drawString (SDL_Renderer *renderer, char* string, SDL_Rect* bounds, float scale) {
     char c;
     char *stringPointer = string;
     int xMax = bounds->x + bounds->w;
@@ -46,17 +46,19 @@ void drawString (SDL_Renderer *renderer, char* string, SDL_Rect* bounds) {
     // printf("drawString Bounds x:%d y:%d w:%d h:%d\n", bounds->x, bounds->y, bounds->w, bounds->h);
     fontWorkingRect.x = bounds->x;
     fontWorkingRect.y = bounds->y;
+    fontWorkingRect.w = FONT_W * scale;
+    fontWorkingRect.h = FONT_H * scale;
     while((c = *(stringPointer++))) {
         // printf("Next char is: %d; %c\n", c, c);
         if (
             c == '\n' ||
-            fontWorkingRect.x + FONT_W > xMax
+            fontWorkingRect.x + fontWorkingRect.w > xMax
         ) {
             fontWorkingRect.x = bounds->x;
             fontWorkingRect.y += FONT_H;
         }
         if (
-            fontWorkingRect.y + FONT_H > yMax
+            fontWorkingRect.y + fontWorkingRect.h > yMax
         ) {
             break;
         } else if (c != '\n') {
@@ -66,7 +68,7 @@ void drawString (SDL_Renderer *renderer, char* string, SDL_Rect* bounds) {
                 &fontRects[c - 32],
                 &fontWorkingRect
             );
-            fontWorkingRect.x += FONT_W;
+            fontWorkingRect.x += fontWorkingRect.w;
         }
     }
 }

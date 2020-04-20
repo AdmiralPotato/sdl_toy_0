@@ -207,7 +207,8 @@ void drawHexEditor (SDL_Renderer *renderer, char* string) {
         drawString(
             renderer,
             hexByteString,
-            &byteFontRects[i]
+            &byteFontRects[i],
+            2.0f
         );
     }
 }

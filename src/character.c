@@ -186,6 +186,7 @@ void drawCharacter (SDL_Renderer *renderer) {
     drawString(
         renderer,
         currentTileType,
-        &currentTileTypeNameRect
+        &currentTileTypeNameRect,
+        1.0f
     );
 }
